@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.groceryapp"
+    namespace "com.himanshusinhaa.groceryapp24"
     defaultConfig {
-        applicationId "com.groceryapp"
+        applicationId "com.himanshusinhaa.groceryapp24"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
