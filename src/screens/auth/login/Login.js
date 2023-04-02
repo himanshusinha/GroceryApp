@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {ROUTES} from '../../../constants';
 import colors from '../../../constants/colors';
-import Auth from '@react-native-firebase/auth';
 import Loader from '../../../components/comman/modal/Loader';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import firestore from '@react-native-firebase/firestore';

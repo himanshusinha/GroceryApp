@@ -17,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 const Home = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
+  const {data} = useSelector(state => state.product);
 
   const dispatch = useDispatch();
   if (loading) {
@@ -27,14 +28,12 @@ const Home = () => {
     dispatch(fetchProducts())
       .unwrap()
       .then(res => {
-        console.log('ress', res);
+        // console.log('ress', res);
       })
       .catch(err => {
-        console.log('err', err);
+        // console.log('err', err);
       });
   }, []);
-
-  const {data} = useSelector(state => state.product);
 
   return (
     <View style={{backgroundColor: colors.white}}>
