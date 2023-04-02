@@ -31,7 +31,9 @@ const WishList = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{bottom: 70}}>Your cart is Empty</Text>
+              <Text style={{bottom: 70}}>
+                There are no orders in your cart !!!
+              </Text>
             </View>
           </View>
         ) : (

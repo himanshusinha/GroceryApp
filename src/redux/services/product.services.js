@@ -17,3 +17,18 @@ export function GetProductListService(params) {
       });
   });
 }
+export function GetAllCategoriesService(payload) {
+  return new Promise((resolve, reject) => {
+    let config = {
+      url: SERVICE_ROUTES.GET_ALL_CATEGORIES,
+      method: METHODS.GET,
+    };
+    Axios.request(config)
+      .then(response => {
+        return resolve(response);
+      })
+      .catch(error => {
+        return reject(error);
+      });
+  });
+}

@@ -10,12 +10,14 @@ import {
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
-import {COLORS, IMAGES} from '../../constants';
+import {COLORS, IMAGES, ROUTES} from '../../constants';
 import styles from '../home/styles';
 import ImageLoad from 'react-native-image-placeholder';
+import {useNavigation} from '@react-navigation/native';
 
 const Search = () => {
   const {data} = useSelector(state => state.product);
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [oldData, setOldData] = useState(data);
   const [searchList, setSearchedList] = useState([]);
@@ -75,7 +77,12 @@ const Search = () => {
           data={searchList}
           renderItem={({item}) => {
             return (
-              <View>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('ProductDetails', {
+                    data: item,
+                  });
+                }}>
                 <View style={styles.productContainer}>
                   <ImageLoad
                     resizeMode={'contain'}
@@ -92,7 +99,7 @@ const Search = () => {
                     <Text style={styles.productPrice}>$ {item.price}</Text>
                   </View>
                 </View>
-              </View>
+              </Pressable>
             );
           }}
         />

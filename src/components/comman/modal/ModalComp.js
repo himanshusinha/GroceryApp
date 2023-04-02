@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {IMAGES} from '../../../constants';
 import colors from '../../../constants/colors';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
 const ModalComp = ({modalVisible, onClose, onLogin, onSignUp}) => {
   return (
@@ -31,12 +32,14 @@ const ModalComp = ({modalVisible, onClose, onLogin, onSignUp}) => {
             borderRadius: 10,
           }}>
           <TouchableOpacity
-            style={{alignSelf: 'flex-end', bottom: 30, right: 20}}
+            style={{alignSelf: 'flex-end', bottom: 30}}
             onPress={() => onClose()}>
             <Image
               style={{
                 width: 20,
                 height: 20,
+                top: moderateScale(10),
+                right: moderateScale(10),
               }}
               source={IMAGES.close}
             />
