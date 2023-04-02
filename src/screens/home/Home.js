@@ -56,15 +56,20 @@ const Home = props => {
             return (
               <TouchableOpacity
                 style={{
-                  width: 150,
+                  width: 140,
                   borderRadius: 10,
-                  padding: 5,
                   justifyContent: 'center',
                   alignItems: 'center',
+                  marginHorizontal: 10,
                   backgroundColor:
                     selectedIndex === index
                       ? colors.gradientForm
-                      : 'transparent',
+                      : colors.white,
+                  borderColor:
+                    selectedIndex === index
+                      ? colors.gradientForm
+                      : colors.primary,
+                  borderWidth: 1,
                 }}
                 onPress={() => setSelectedIndex(index)}>
                 <View>
@@ -72,6 +77,7 @@ const Home = props => {
                     style={{
                       color:
                         selectedIndex === index ? colors.white : colors.black,
+                      padding: 5,
                     }}>
                     {item}
                   </Text>
