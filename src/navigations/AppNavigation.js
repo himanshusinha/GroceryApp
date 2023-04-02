@@ -8,6 +8,8 @@ import Search from '../screens/search/Search';
 import WishList from '../screens/wishlist/WishList';
 import DrawerNavigation from './DrawerNavigation';
 import ProductDetails from '../screens/home/ProductDetails';
+import Login from '../screens/auth/login/Login';
+import SignUp from '../screens/auth/signup/SignUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +26,8 @@ const AppNavigation = () => {
         <Stack.Screen name={ROUTES.PROFILE} component={Profile} />
         <Stack.Screen name={ROUTES.SEARCH} component={Search} />
         <Stack.Screen name={ROUTES.WISHLIST} component={WishList} />
+        <Stack.Screen name={ROUTES.LOGIN} component={Login} />
+        <Stack.Screen name={ROUTES.SIGN_UP} component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

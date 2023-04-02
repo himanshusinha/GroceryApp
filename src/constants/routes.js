@@ -5,4 +5,6 @@ export default {
   PROFILE: 'Profile',
   SEARCH: 'Search',
   WISHLIST: 'WishList',
+  LOGIN: 'Login',
+  SIGN_UP: 'SignUp',
 };

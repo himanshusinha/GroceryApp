@@ -9,6 +9,7 @@ const wishlistSlice = createSlice({
     addToWishList(state, action) {
       const {payload} = action;
       const itemInWishList = state?.find(item => item?.id === payload.id);
+
       if (itemInWishList) {
         return state;
       } else {
@@ -16,7 +17,7 @@ const wishlistSlice = createSlice({
       }
     },
     removeFromWishList(state, action) {
-      return state.filter(item => item.id !== action.payload);
+      return (state = state.filter(item => item.id !== action.payload.id));
     },
   },
 });

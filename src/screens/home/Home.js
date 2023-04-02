@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {FlatList, Pressable, Text, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {View} from 'react-native';
 import {fetchProducts} from '../../redux/asyncThunk/product.asyncThunk';
 import colors from '../../constants/colors';
 import ImageLoad from 'react-native-image-placeholder';
 import styles from './styles';
-import {COLORS, ROUTES} from '../../constants';
+import {COLORS} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 const Home = props => {
   const itemId = props.route.params;
@@ -14,6 +20,14 @@ const Home = props => {
   console.log(itemId);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const categories = [
+    "men's clothing",
+    'jewelery',
+    'electronics',
+    "women's clothing",
+  ];
   const dispatch = useDispatch();
   if (loading) {
     setLoading(false);
@@ -33,6 +47,40 @@ const Home = props => {
 
   return (
     <View style={{backgroundColor: colors.white}}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{marginTop: 10, marginHorizontal: 10}}>
+        <View style={{flexDirection: 'row'}}>
+          {categories.map((item, index) => {
+            return (
+              <TouchableOpacity
+                style={{
+                  width: 150,
+                  borderRadius: 10,
+                  padding: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor:
+                    selectedIndex === index
+                      ? colors.gradientForm
+                      : 'transparent',
+                }}
+                onPress={() => setSelectedIndex(index)}>
+                <View>
+                  <Text
+                    style={{
+                      color:
+                        selectedIndex === index ? colors.white : colors.black,
+                    }}>
+                    {item}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </ScrollView>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
