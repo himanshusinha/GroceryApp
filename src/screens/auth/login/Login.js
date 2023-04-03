@@ -1,8 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
-  Alert,
-  SafeAreaView,
+   SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,

@@ -1,5 +1,4 @@
 export default {
-  SPLASH: 'Spash',
   HOME: 'Home',
   PRODUCT_DETAILS: 'ProductDetails',
   NOTIFICATIONS: 'Notifications',

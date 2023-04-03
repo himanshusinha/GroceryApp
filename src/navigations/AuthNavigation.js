@@ -19,6 +19,15 @@ const AuthNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name={ROUTES.HOME} component={DrawerNavigation} />
+        <Stack.Screen
+          name={ROUTES.PRODUCT_DETAILS}
+          component={ProductDetails}
+        />
+        <Stack.Screen name={ROUTES.NOTIFICATIONS} component={Notifications} />
+        <Stack.Screen name={ROUTES.PROFILE} component={Profile} />
+        <Stack.Screen name={ROUTES.SEARCH} component={Search} />
+        <Stack.Screen name={ROUTES.WISHLIST} component={WishList} />
         <Stack.Screen name={ROUTES.LOGIN} component={Login} />
         <Stack.Screen name={ROUTES.SIGN_UP} component={SignUp} />
 
