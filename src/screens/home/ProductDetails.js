@@ -14,14 +14,12 @@ import {useDispatch} from 'react-redux';
 import {COLORS, IMAGES, ROUTES} from '../../constants';
 import colors from '../../constants/colors';
 import {addToCart} from '../../redux/slice/cart.slice';
-import ModalComp from '../../components/comman/modal/ModalComp';
 
 const ProductDetails = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const {data} = route.params;
+  console.log('data is', data);
   const [qty, setQty] = useState(1);
   const checkStaus = async () => {
     let isUserLoggedIn = false;
@@ -54,17 +52,11 @@ const ProductDetails = () => {
               resizeMode={'contain'}
               style={{width: 300, height: 300, alignSelf: 'center'}}
               loadingStyle={{color: COLORS.gradientForm}}
-              source={{
-                uri: data.image,
-              }}
+              source={{uri: data.image}}
             />
             <TouchableOpacity
               onPress={() => {
-                if (checkStaus() === true) {
-                  dispatch(addToCart(data));
-                } else {
-                  setModalVisible(true);
-                }
+                dispatch(addToCart(data));
               }}
               style={{
                 width: 40,
@@ -188,21 +180,17 @@ const ProductDetails = () => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            if (checkStaus() === true) {
-              dispatch(
-                addToCart({
-                  id: data.id,
-                  title: data.title,
-                  price: data.price,
-                  description: data.description,
-                  qty: qty,
-                  image: data.image,
-                  rating: data.rating,
-                }),
-              );
-            } else {
-              setModalVisible(true);
-            }
+            dispatch(
+              addToCart({
+                id: data.id,
+                title: data.title,
+                price: data.price,
+                description: data.description,
+                qty: qty,
+                image: data.image,
+                rating: data.rating,
+              }),
+            );
           }}
           style={{
             backgroundColor: colors.gradientForm,
@@ -223,18 +211,6 @@ const ProductDetails = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <ModalComp
-        modalVisible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onLogin={() => {
-          setModalVisible(false);
-          navigation.navigate(ROUTES.LOGIN);
-        }}
-        onSignUp={() => {
-          setModalVisible(false);
-          navigation.navigate(ROUTES.SIGN_UP);
-        }}
-      />
     </SafeAreaView>
   );
 };

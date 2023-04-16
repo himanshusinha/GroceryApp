@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
-import colors from '../../../constants/colors';
+import colors from '../../../../constants/colors';
 const Loader = ({visible = false}) => {
   const {width, height} = useWindowDimensions();
   return (

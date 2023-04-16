@@ -1,21 +1,23 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import productReducer from '../slice/product.slice';
-import cartReducer from '../slice/cart.slice';
-import wishlistReducer from '../slice/wishlist.slice';
-import storage from 'redux-persist/lib/storage';
-import persistReducer from 'redux-persist/es/persistReducer';
-let persistConfig = {
+import {applyMiddleware, configureStore} from '@reduxjs/toolkit';
+import rootReducers from '../slice/';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {persistReducer} from 'redux-persist';
+import thunk from 'redux-thunk';
+import {persistStore} from 'redux-persist';
+import {composeWithDevTools} from '@redux-devtools/extension';
+const persistConfig = {
   key: 'root',
-  storage,
+  version: 1,
+  storage: AsyncStorage,
+  whiteList: ['auth'],
 };
-let rootReducer = combineReducers({
-  product: productReducer,
-  cart: cartReducer,
-  wishlist: wishlistReducer,
-});
-let persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = configureStore({
+export const persistedReducer = persistReducer(
+  persistConfig,
+  rootReducers,
+  composeWithDevTools(applyMiddleware()),
+);
+export const store = configureStore({
   reducer: persistedReducer,
+  middleware: [thunk],
 });
-
-export default store;
+export const persistor = persistStore(store);

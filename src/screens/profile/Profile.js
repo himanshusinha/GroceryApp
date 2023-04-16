@@ -2,20 +2,34 @@ import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Auth from '@react-native-firebase/auth';
 import colors from '../../constants/colors';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/slice/auth.slice';
 
 const Profile = () => {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
+  const handleLogOut = () => {
+    dispatch(logout());
+    Auth().signOut();
+  };
   return (
-    <SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <View
         style={{
           backgroundColor: colors.white,
           justifyContent: 'center',
           alignItems: 'center',
+          width: '100%',
         }}>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={handleLogOut}
           style={{
             width: '90%',
             height: 45,
@@ -27,7 +41,7 @@ const Profile = () => {
           <Text style={{color: colors.white}}>Logout</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default Profile;

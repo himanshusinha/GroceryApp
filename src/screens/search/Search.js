@@ -16,17 +16,16 @@ import ImageLoad from 'react-native-image-placeholder';
 import {useNavigation} from '@react-navigation/native';
 
 const Search = () => {
-  const {data} = useSelector(state => state.product);
   const navigation = useNavigation();
   const [search, setSearch] = useState('');
-  const [oldData, setOldData] = useState(data);
+  // const [oldData, setOldData] = useState(data);
   const [searchList, setSearchedList] = useState([]);
-  const filterData = txt => {
-    let newData = oldData.filter(item => {
-      return item.title.toLowerCase().match(txt.toLowerCase());
-    });
-    setSearchedList(newData);
-  };
+  // const filterData = txt => {
+  //   let newData = oldData.filter(item => {
+  //     return item.title.toLowerCase().match(txt.toLowerCase());
+  //   });
+  //   setSearchedList(newData);
+  // };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View

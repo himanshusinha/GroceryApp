@@ -11,14 +11,16 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {COLORS, IMAGES} from '../../constants';
+import {COLORS} from '../../constants';
 import styles from '../home/styles';
 import ImageLoad from 'react-native-image-placeholder';
+import {removeFromWishList} from '../../redux/slice/wishlist.slice';
 import {
-  addToWishList,
-  removeFromWishList,
-} from '../../redux/slice/wishlist.slice';
-const WishList = () => {
+  addItemToCart,
+  addToCart,
+  removeToCart,
+} from '../../redux/slice/cart.slice';
+const Cart = () => {
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const items = useSelector(state => state.cart);
@@ -50,9 +52,9 @@ const WishList = () => {
                       <TouchableOpacity
                         onPress={() => {
                           if (qty > 1) {
-                            dispatch(removeFromWishList(item));
+                            dispatch(removeToCart(item));
                           } else {
-                            dispatch(removeFromWishList(index));
+                            dispatch(removeToCart(index));
                           }
                         }}
                         style={{
@@ -76,7 +78,7 @@ const WishList = () => {
                         <Text style={{fontSize: 18}}>{item.qty}</Text>
                       </View>
                       <TouchableOpacity
-                        onPress={() => dispatch(addToWishList(item))}
+                        onPress={() => dispatch(addItemToCart(item))}
                         style={{
                           borderColor: 'black',
                           borderWidth: 1,
@@ -100,4 +102,4 @@ const WishList = () => {
     </SafeAreaView>
   );
 };
-export default WishList;
+export default Cart;

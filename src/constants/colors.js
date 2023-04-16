@@ -9,4 +9,5 @@ export default {
   gray: '#666666',
   grayLight: '#ccc',
   black: '#0a0a0a',
+  transparent: 'rgba(0,0,0,0.5)',
 };

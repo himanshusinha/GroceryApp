@@ -58,7 +58,7 @@ const DrawerNavigation = () => {
                 alignItems: 'center',
               }}>
               <Text style={{color: 'white', fontSize: 13, alignSelf: 'center'}}>
-                {items.length}
+                {items?.length}
               </Text>
             </View>
           </TouchableOpacity>

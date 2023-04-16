@@ -11,9 +11,11 @@ import {ROUTES} from '../../../constants';
 import colors from '../../../constants/colors';
 
 import Auth from '@react-native-firebase/auth';
-import Loader from '../../../components/comman/modal/Loader';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import firestore from '@react-native-firebase/firestore';
+import Loader from '../../../components/comman/modal/Modal/Loader';
+import {registerAccount} from '../../../redux/slice/auth.slice';
+import {useDispatch} from 'react-redux';
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +24,8 @@ const SignUp = () => {
   const [cpassword, setCPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const signUp = async () => {
     setLoading(true);
     setTimeout(async () => {
@@ -48,8 +52,23 @@ const SignUp = () => {
           Toast.show({
             type: 'success',
             text1: 'User account created  successfully !!!',
-          });
-          navigation.navigate('Login');
+          })
+            .then(userAuth => {
+              // store the user's information in the redux state
+              dispatch(
+                registerAccount({
+                  email: userAuth.user.email,
+                  uid: userAuth.user.uid,
+                  displayName: userAuth.user.displayName,
+                  photoUrl: userAuth.user.photoURL,
+                }),
+              );
+            })
+            // display the error if any
+            .catch(err => {
+              alert(err);
+            });
+          navigation.goBack();
         } else {
           Toast.show({
             type: 'error',
@@ -70,7 +89,7 @@ const SignUp = () => {
     if (name === '') {
       Toast.show({
         type: 'error',
-        text1: 'please enter email',
+        text1: 'please enter name',
       });
     } else if (email === '') {
       Toast.show({
@@ -85,20 +104,19 @@ const SignUp = () => {
     } else if (password === '') {
       Toast.show({
         type: 'error',
-        text1: 'please enter mobile',
-      });
-    } else if (cpassword === '') {
-      Toast.show({
-        type: 'error',
-        text1: 'please enter mobile',
-      });
-    } else {
-      Toast.show({
-        type: 'error',
-        text1: 'please fill all details',
+        text1: 'please enter password',
       });
     }
+    if (password !== cpassword) {
+      Toast.show({
+        type: 'error',
+        text1: 'Confirm password is not matched',
+      });
+    } else {
+      signUp();
+    }
   };
+
   return (
     <SafeAreaView
       style={{
@@ -116,6 +134,7 @@ const SignUp = () => {
             placeholder="Enter your name"
             value={name}
             onChangeText={e => setName(e)}
+            autoCapitalize="none"
             style={{
               width: '100%',
               borderWidth: 1,
@@ -131,6 +150,7 @@ const SignUp = () => {
             placeholder="Enter your email"
             value={email}
             onChangeText={e => setEmail(e)}
+            autoCapitalize="none"
             style={{
               width: '100%',
               borderWidth: 1,
@@ -146,6 +166,7 @@ const SignUp = () => {
             placeholder="Enter your mobile"
             value={mobile}
             onChangeText={e => setMobile(e)}
+            autoCapitalize="none"
             style={{
               width: '100%',
               borderWidth: 1,
@@ -161,6 +182,7 @@ const SignUp = () => {
             placeholder="Enter your password"
             value={password}
             secureTextEntry
+            autoCapitalize="none"
             onChangeText={e => setPassword(e)}
             style={{
               width: '100%',
@@ -177,6 +199,7 @@ const SignUp = () => {
             placeholder="Enter your confirm password"
             secureTextEntry
             value={cpassword}
+            autoCapitalize="none"
             onChangeText={e => setCPassword(e)}
             style={{
               width: '100%',
@@ -190,9 +213,7 @@ const SignUp = () => {
         </View>
         <View style={{marginTop: 40}}>
           <TouchableOpacity
-            onPress={() => {
-              signUp();
-            }}
+            onPress={handleSignUp}
             style={{
               backgroundColor: colors.gradientForm,
               height: 50,

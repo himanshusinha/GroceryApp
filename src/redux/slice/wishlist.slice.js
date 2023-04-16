@@ -17,7 +17,14 @@ const wishlistSlice = createSlice({
       }
     },
     removeFromWishList(state, action) {
-      return (state = state.filter(item => item.id !== action.payload.id));
+      const {payload} = action;
+      const itemInWishList = state?.find(item => item?.id === payload.id);
+
+      if (itemInWishList) {
+        return state;
+      } else {
+        return state?.concat({...payload, quantity: 1});
+      }
     },
   },
 });

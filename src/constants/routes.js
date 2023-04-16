@@ -1,4 +1,5 @@
 export default {
+  SPLASH: 'Splash',
   HOME: 'Home',
   PRODUCT_DETAILS: 'ProductDetails',
   NOTIFICATIONS: 'Notifications',
@@ -8,4 +9,7 @@ export default {
   LOGIN: 'Login',
   SIGN_UP: 'SignUp',
   FORGOT_PASSWORD: 'ForgotPassword',
+  CART: 'Cart',
+  BOTTOM_NAVIGATION: 'BottomNavigation',
+  DRAWWER_NAVIGATION: 'DrawerNavigation',
 };

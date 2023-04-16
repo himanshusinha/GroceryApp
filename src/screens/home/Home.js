@@ -1,23 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import ImageLoad from 'react-native-image-placeholder';
-import {
-  FlatList,
-  Pressable,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {Pressable, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
 import colors from '../../constants/colors';
 import styles from './styles';
-import {COLORS} from '../../constants';
+import {COLORS, ROUTES} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
-import Loader from '../../components/comman/modal/Loader';
+import Loader from '../../components/comman/modal/Modal/Loader';
 const Home = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [isPressed, setIsPressed] = useState(false);
   const [filter, setFilter] = useState(data);
   if (loading) {
     setLoading(false);
@@ -180,7 +173,7 @@ const Home = () => {
       </ScrollView>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{marginTop: 10, marginHorizontal: 10}}>
+        style={{marginTop: 10, marginHorizontal: 10, height: '100%'}}>
         <View
           style={{marginBottom: 100, flex: 1, backgroundColor: colors.white}}>
           {filter.map((item, index) => {
